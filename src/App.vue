@@ -1,6 +1,18 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+     <header style="text-align: center;">
+      <h1>WFTeam 工时</h1>
+    </header> 
+    <!-- <nav>
+      <el-menu theme="dark" mode="horizontal">
+        <el-menu-item index="1">
+          <router-link to="/">Dashboard</router-link>
+        </el-menu-item>
+        <el-menu-item index="2">
+          <router-link to="/projects">项目</router-link>
+        </el-menu-item>
+      </el-menu>
+    </nav> -->
     <router-view></router-view>
   </div>
 </template>
@@ -12,12 +24,14 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+#app {}
+
+header {
+  height: 60px;
+}
+
+.el-menu-item {
+  height: 30px !important;
+  line-height: 30px !important;
 }
 </style>
