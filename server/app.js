@@ -5,9 +5,12 @@ var fs = require('fs'),
     http = require('http');
 
 var app = require('connect')();
+var serveStatic = require('serve-static');
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 8000;
+
+app.use(serveStatic(path.join(__dirname, 'public')));
 
 // swaggerRouter configuration
 var options = {
