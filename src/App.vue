@@ -24,7 +24,8 @@ export default {
 </script>
 
 <style>
-#app {}
+#app {
+}
 
 header {
   height: 60px;

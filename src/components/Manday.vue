@@ -1,15 +1,19 @@
 <template>
   <div class="manday">
-    <el-table :data="mandays" :border="true">
-      <el-table-column prop="date" label="日期" width="120">
-      </el-table-column>
-      <el-table-column prop="realName" label="成员" width="100">
-      </el-table-column>
-      <el-table-column prop="projectName" label="项目">
-      </el-table-column>
-      <el-table-column prop="hours" label="工时" width="100">
-      </el-table-column>
-    </el-table>
+    <el-card>
+      <div slot="header" class="card-header">工时</div>
+  
+      <el-table :data="mandays" :border="true">
+        <el-table-column prop="date" label="日期" width="120">
+        </el-table-column>
+        <el-table-column prop="realName" label="成员" width="100">
+        </el-table-column>
+        <el-table-column prop="projectName" label="项目">
+        </el-table-column>
+        <el-table-column prop="hours" label="工时" width="100">
+        </el-table-column>
+      </el-table>
+    </el-card>
   </div>
 </template>
 

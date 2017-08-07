@@ -2,19 +2,12 @@
   <div class="dashboard">
     <el-row>
       <el-col :span="13" :offset="1">
-        <el-card>
-          <div slot="header" class="card-header">工时</div>
-          <Manday />
-        </el-card>
+        <Manday />
       </el-col>
       <el-col :span="8" :offset="1">
         <Project />
-  
         <div style="margin-top: 10px;"></div>
-        <el-card>
-          <div slot="header" class="card-header">成员</div>
-          <User />
-        </el-card>
+        <User />
       </el-col>
     </el-row>
   </div>

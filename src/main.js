@@ -13,6 +13,9 @@ Vue.use(ElementUI);
 Vue.config.productionTip = false;
 
 Vue.prototype.$http = axios;
+// .create({
+//   baseURL: 'http://localhost:8000/api/'
+// });
 
 /* eslint-disable no-new */
 new Vue({
