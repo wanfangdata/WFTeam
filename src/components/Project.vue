@@ -65,6 +65,8 @@ export default {
           this.$http.post('/api/project', this.addForm)
             .then(response => {
               console.log(response);
+              this.dialogFormVisible = false;
+              this.getProjects();
             })
             .catch(error => {
               if (error.response) {
@@ -91,9 +93,10 @@ export default {
       });
     },
     getProjects() {
-      this.projects = [
-        { projectKey: 'Project1', projectName: '项目1', hours: 16 }
-      ];
+      this.$http.get('/api/project')
+      .then(response => {
+        this.projects = response.data;
+      });
     }
   }
 }

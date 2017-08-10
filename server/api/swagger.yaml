@@ -14,12 +14,26 @@ basePath: "/api"
 tags:
 - name: "user"
   description: "用户"
-  externalDocs:
-    description: "Find out more about our store"
-    url: "http://swagger.io"
 schemes:
 - "http"
 paths:
+  /user:
+    get:
+      tags:
+      - "user"
+      x-swagger-router-controller: "User"
+      summary: "获取用户列表"
+      description: ""
+      operationId: "getUsers"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: ""
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/User"
   /user/login:
     post:
       tags:
@@ -53,6 +67,64 @@ paths:
               description: "date in UTC when token expires"
         400:
           description: "Invalid username/password supplied"
+  /user/profile:
+    put:
+      tags:
+      - "user"
+      x-swagger-router-controller: "User"
+      summary: "完善用户信息"
+      description: ""
+      operationId: "profileUser"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: "The user name for login"
+        required: true
+        schema:
+          $ref: "#/definitions/ProfileUser"
+      responses:
+        200:
+          description: "OK"
+  /project:
+    get:
+      tags:
+      - "project"
+      x-swagger-router-controller: "Project"
+      summary: "获取项目列表"
+      description: ""
+      operationId: "getProjects"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Project'
+    post:
+      tags:
+      - "project"
+      x-swagger-router-controller: "Project"
+      summary: "新增项目"
+      description: ""
+      operationId: "addProject"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/Project"
+      responses:
+        200:
+          description: "新增项目成功"
+        400:
+          description: "参数不合法"
 securityDefinitions:
   api_key:
     type: "apiKey"
@@ -63,6 +135,25 @@ definitions:
     type: "object"
     properties:
       userName:
+        type: "string"
+  ProfileUser:
+    type: "object"
+    properties:
+      realName:
+        type: "string"        
+  User:
+    type: "object"
+    properties:
+      userName:
+        type: "string"
+      realName:
+        type: "string"
+  Project:
+    type: "object"
+    properties:
+      projectKey:
+        type: "string"
+      projectName:
         type: "string"
 externalDocs:
   description: "接口说明"

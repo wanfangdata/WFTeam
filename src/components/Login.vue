@@ -27,6 +27,8 @@
 </template>
 
 <script>
+import bus from '../bus.js';
+
 export default {
     data() {
         return {
@@ -59,15 +61,21 @@ export default {
                     this.$http.post('/api/user/login', this.loginForm)
                         .then(response => {
                             let user = response.data;
+
+                            // 保存认证信息
+                            this.$http.defaults.headers.common['api_key'] = user.userName;
+
                             if (!user.realName) {
                                 this.profileFormVisible = true;
                                 return false;
                             }
                             else {
-                                this.$message({
+                                this.$notify({
                                     message: '正在登入...',
                                     type: 'success'
                                 });
+                                bus.$emit('loginComplete', user);
+                                this.$router.push('/');
                             }
                         })
                         .catch(error => {
@@ -84,10 +92,12 @@ export default {
                 if (valid) {
                     this.$http.put('/api/user/profile', this.profileForm)
                         .then(response => {
-                            this.$message({
+                            this.$notify({
                                 message: '正在登入...',
                                 type: 'success'
                             });
+                            bus.$emit('loginComplete', { userName: this.loginForm.userName, realName: this.profileForm.realName });
+                            this.$router.push('/');
                         })
                         .catch(error => {
                             console.log(error);

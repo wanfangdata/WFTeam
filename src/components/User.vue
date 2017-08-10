@@ -28,10 +28,6 @@ export default {
   },
   methods: {
     getUsers() {
-      this.users = [
-        { userName: 'richard', realName: 'Richard Hendricks', hours: 8 },
-        { userName: 'you', realName: '尤小右', hours: 8 },
-      ];
       this.$http.get('/api/user')
         .then(response => {
           this.users = response.data;

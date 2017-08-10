@@ -1,6 +1,9 @@
 <template>
   <div class="dashboard">
     <el-row>
+      <h2 style="text-align: center;">{{realName}}({{userName}})</h2>
+    </el-row>
+    <el-row>
       <el-col :span="13" :offset="1">
         <Manday />
       </el-col>
@@ -25,7 +28,18 @@ export default {
   },
   data() {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      msg: 'Welcome to Your Vue.js App',
+      userName: '',
+      realName: ''
+    }
+  },
+  created() {
+    bus.$on('loginComplete', this.loginComplete);
+  },
+  methods: {
+    loginComplete: function (user) {
+      this.userName = user.userName;
+      this.realName = user.realName;
     }
   }
 }
