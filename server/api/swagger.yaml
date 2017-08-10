@@ -125,6 +125,44 @@ paths:
           description: "新增项目成功"
         400:
           description: "参数不合法"
+  /manday:
+    get:
+      tags:
+      - "manday"
+      x-swagger-router-controller: "Manday"
+      summary: "获取工时列表"
+      description: ""
+      operationId: "getMandays"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Manday'
+    post:
+      tags:
+      - "manday"
+      x-swagger-router-controller: "Manday"
+      summary: "新增工时"
+      description: ""
+      operationId: "addManday"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/Manday"
+      responses:
+        200:
+          description: "新增工时成功"
+        400:
+          description: "参数不合法"
 securityDefinitions:
   api_key:
     type: "apiKey"
@@ -155,6 +193,17 @@ definitions:
         type: "string"
       projectName:
         type: "string"
+  Manday:
+    type: "object"
+    properties:
+      date:
+        type: "string"
+        format: "date"
+      projectKey:
+        type: "string"
+      hours:
+        type: "integer"
+        format: "int32"
 externalDocs:
   description: "接口说明"
   url: "https://github.com/hueidou/WFTeam/blob/master/server/README.md"

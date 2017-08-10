@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
-    <el-row>
-      <h2 style="text-align: center;">{{realName}}({{userName}})</h2>
+    <el-row type="flex" justify="center" align="middle" style="margin-bottom: 10px;">
+      <h2>({{userName}})</h2>
     </el-row>
     <el-row>
       <el-col :span="13" :offset="1">
@@ -20,6 +20,7 @@
 import User from './User'
 import Project from './Project'
 import Manday from './Manday'
+import bus from '../bus.js';
 
 export default {
   name: 'dashboard',
@@ -33,13 +34,18 @@ export default {
       realName: ''
     }
   },
+  mounted() {
+    this.getUserName();
+  },
   created() {
-    bus.$on('loginComplete', this.loginComplete);
+    //bus.$on('loginComplete', this.loginComplete);
   },
   methods: {
     loginComplete: function (user) {
       this.userName = user.userName;
-      this.realName = user.realName;
+    },
+    getUserName: function(){
+      this.userName = localStorage.api_key;
     }
   }
 }

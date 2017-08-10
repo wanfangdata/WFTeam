@@ -64,8 +64,8 @@ export default {
         if (valid) {
           this.$http.post('/api/project', this.addForm)
             .then(response => {
-              console.log(response);
               this.dialogFormVisible = false;
+              this.$refs.addForm.resetFields();
               this.getProjects();
             })
             .catch(error => {

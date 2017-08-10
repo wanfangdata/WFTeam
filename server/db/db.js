@@ -27,9 +27,9 @@ var userSchema = new mongoose.Schema({
 var mandaySchema = new mongoose.Schema({
     date: Date,
     userName: String,
-    //realName: String,
+    realName: String,
     projectKey: String,
-    //projectName: String,
+    projectName: String,
     hours: Number
 });
 
@@ -40,5 +40,5 @@ module.exports = {
     mandaySchema: mandaySchema,
     projects: mongoose.model("projects", projectSchema),
     users: mongoose.model("users", userSchema),
-    manday: mongoose.model("mandays", mandaySchema)
+    mandays: mongoose.model("mandays", mandaySchema)
 };

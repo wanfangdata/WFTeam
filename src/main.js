@@ -16,6 +16,20 @@ Vue.prototype.$http = axios;
 // .create({
 //   baseURL: 'http://localhost:8000/api/'
 // });
+router.beforeEach((to, from, next) => {
+  // 判断用户登录状态
+  if (!localStorage.api_key && to.name != 'Login') {
+    next('/login');
+  }
+  else if (!!localStorage.api_key && to.name == 'Login') {
+    axios.defaults.headers.common['api_key'] = localStorage.api_key;
+    next('/');
+  }
+  else {
+    axios.defaults.headers.common['api_key'] = localStorage.api_key;
+    next();
+  }
+});
 
 /* eslint-disable no-new */
 new Vue({
