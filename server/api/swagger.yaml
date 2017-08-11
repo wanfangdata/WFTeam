@@ -135,6 +135,12 @@ paths:
       operationId: "getMandays"
       produces:
       - "application/json"
+      parameters:
+      - name: "show"
+        in: "query"
+        description: ""
+        required: true
+        type: "string"
       responses:
         200:
           description: "OK"
@@ -161,6 +167,51 @@ paths:
       responses:
         200:
           description: "新增工时成功"
+        400:
+          description: "参数不合法"
+  /manday/{_id}:
+    delete:
+      tags:
+      - "manday"
+      x-swagger-router-controller: "Manday"
+      summary: "删除工时"
+      description: ""
+      operationId: "deleteManday"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "删除工时成功"
+    put:
+      tags:
+      - "manday"
+      x-swagger-router-controller: "Manday"
+      summary: "编辑工时"
+      description: ""
+      operationId: "modifyManday"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/Manday"
+      responses:
+        200:
+          description: "更新工时成功"
         400:
           description: "参数不合法"
 securityDefinitions:
