@@ -14,6 +14,7 @@ module.exports.getMandays = function (req, res, next) {
   }
 
   db.mandays.find(filter)
+    .populate('user project')
     .sort({ date: 'desc' })
     .exec(function (err, docs) {
       res.setHeader('Content-Type', 'application/json');

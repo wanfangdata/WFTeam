@@ -10,8 +10,8 @@
         <el-table-column type="expand">
           <template scope="props">
             <el-form>
-              <el-form-item label="描述：">
-                <span>{{ props.row.description }}</span>
+              <el-form-item label="描述：" label-width="60px">
+                <span v-html="props.row.description.replace(/\n/g, '<br />')"></span>
               </el-form-item>
               <el-form-item style="text-align:right" v-if="props.row.userName == currentUser">
                 <el-button-group>
@@ -22,11 +22,15 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column prop="date" label="日期" width="120px" :formatter="dateFormatter">
+        <el-table-column prop="date" label="日期" width="140px" :formatter="dateFormatter">
+          <template scope="scope">
+            <span>{{ dateFormatter(null, null, scope.row.date) }}</span>
+            <el-tag type="primary" v-if="isToday(scope.row.date)">今</el-tag>
+          </template>
         </el-table-column>
-        <el-table-column prop="userName" label="成员" width="120px">
+        <el-table-column prop="user.realName" label="成员" width="120px">
         </el-table-column>
-        <el-table-column prop="projectKey" label="项目">
+        <el-table-column prop="project.projectName" label="项目">
         </el-table-column>
         <el-table-column prop="hours" label="工时" width="70px">
         </el-table-column>
@@ -58,7 +62,7 @@
           </el-col>
         </el-form-item>
         <el-form-item label="描述" prop="description" label-width="50px">
-          <el-input v-model="mandayForm.description" type="textarea" style="width: 300px;">
+          <el-input v-model="mandayForm.description" type="textarea" style="width: 300px;" :autosize="{ minRows: 4, maxRows: 10 }">
           </el-input>
         </el-form-item>
       </el-form>
@@ -103,7 +107,8 @@ export default {
       projects: [],
       dateFormatter: function (row, column, cellValue) {
         return moment(cellValue).format('YYYY-MM-DD');
-      }
+      },
+      today: new Date()
     }
   },
   watch: {
@@ -114,10 +119,13 @@ export default {
   mounted() {
     this.getMandays();
     this.getProjects();
-    
+
     this.currentUser = localStorage.api_key;
   },
   methods: {
+    isToday(date) {
+      return moment(date).isSame(this.today, 'day');
+    },
     getMandays() {
       this.$http.get('/api/manday?show=' + this.show)
         .then(response => {
@@ -191,5 +199,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.el-tag {
+  font-size: 10px;
+  height: 18px;
+  line-height: 18px;
+  padding: 0 2px;
+}
 </style>

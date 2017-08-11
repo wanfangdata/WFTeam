@@ -23,16 +23,39 @@ var userSchema = new mongoose.Schema({
 /**
  * 人天、工时
  */
-var mandaySchema = new mongoose.Schema({
-    date: Date,
-    userName: String,
-    realName: String,
-    projectKey: String,
-    projectName: String,
-    hours: Number,
-    description: String
+var mandaySchema = new mongoose.Schema(
+    {
+        date: Date,
+        userName: String,
+        projectKey: String,
+        hours: Number,
+        description: String
+    },
+    {
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true }
+    }
+);
+
+/**
+ * 外键
+ */
+mandaySchema.virtual('user', {
+    ref: 'users',
+    localField: 'userName',
+    foreignField: 'userName',
+    justOne: true
 });
 
+/**
+ * 外键
+ */
+mandaySchema.virtual('project', {
+    ref: 'projects',
+    localField: 'projectKey',
+    foreignField: 'projectKey',
+    justOne: true
+});
 
 module.exports = {
     projectSchema: projectSchema,
