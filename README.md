@@ -1,21 +1,49 @@
-# wfteam
+# WFTeam
 
 > A assistant for wanfang team
 
-## Build Setup
+## 开发
 
 ``` bash
+# web
+cd WFTeam
+
 # install dependencies
 npm install
 
 # serve with hot reload at localhost:8080
-npm run dev
+npm run dev 
+```
+``` bash
+# 设置MongoDB环境变量
+set MONGODB_CONNECTION=127.0.0.1:27017/wfteam
 
-# build for production with minification
-npm run build
+# server
+cd server
 
-# build for production and view the bundle analyzer report
-npm run build --report
+# install dependencies
+npm install
+
+# serve with hot reload at localhost:8000
+npm start
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## 构建&部署
+
+``` bash
+# build
+cd WFTeam
+docker build -f Dockerfile -t wfteam:latest .
+
+# deploy & run
+docker run --name wfteam -p 8000:8000 -e "MONGODB_CONNECTION=127.0.0.1:27017/wfteam" -d wfteam:latest
+docker start wfteam
+
+```
+
+## 其他
+
+建议使用淘宝NPM源：
+``` bash
+npm config set registry https://registry.npm.taobao.org
+```
