@@ -6,7 +6,16 @@
         <el-button type="primary" icon="plus" size="mini" style="float:right;" @click="openAddForm()"></el-button>
       </div>
       <el-table :data="mandays" :border="true">
-        <el-table-column prop="date" label="日期" width="120" :formatter="dateFormateer">
+        <el-table-column type="expand">
+          <template scope="props">
+            <el-form>
+              <el-form-item label="描述：">
+                <span>{{ props.row.description }}</span>
+              </el-form-item>
+            </el-form>
+          </template>
+        </el-table-column>
+        <el-table-column prop="date" label="日期" width="120" :formatter="dateFormatter">
         </el-table-column>
         <el-table-column prop="userName" label="成员" width="100">
         </el-table-column>
@@ -19,7 +28,7 @@
   
     <el-dialog title="新增工时" :visible.sync="dialogFormVisible" size="tiny">
       <el-form :model="addForm" :rules="rules" ref="addForm">
-        <el-form-item label="日期" prop="date">
+        <el-form-item label="日期" prop="date" label-width="50px">
           <el-date-picker v-model="addForm.date" type="date" placeholder="选择日期">
           </el-date-picker>
         </el-form-item>
@@ -40,6 +49,10 @@
               </el-input>
             </el-form-item>
           </el-col>
+        </el-form-item>
+        <el-form-item label="描述" prop="description" label-width="50px">
+          <el-input v-model="addForm.description" type="textarea" style="width: 300px;">
+          </el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -62,7 +75,8 @@ export default {
       addForm: {
         date: new Date(),
         projectKey: '',
-        hours: 8
+        hours: 8,
+        description: ''
       },
       rules: {
         date: [
@@ -76,7 +90,7 @@ export default {
         ]
       },
       projects: [],
-      dateFormateer: function(row, column, cellValue){
+      dateFormatter: function (row, column, cellValue) {
         return moment(cellValue).format('YYYY-MM-DD');
       }
     }
@@ -117,7 +131,7 @@ export default {
         }
       });
     },
-    openAddForm(){
+    openAddForm() {
       this.dialogFormVisible = true;
       this.getProjects();
     }

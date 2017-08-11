@@ -29,7 +29,8 @@ var mandaySchema = new mongoose.Schema({
     realName: String,
     projectKey: String,
     projectName: String,
-    hours: Number
+    hours: Number,
+    description: String
 });
 
 

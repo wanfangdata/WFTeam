@@ -32,6 +32,7 @@ module.exports.addManday = function (req, res, next) {
       manday.projectKey = model.projectKey;
       manday.userName = userName;
       manday.hours = model.hours;
+      manday.description = model.description;
 
       manday.save(function (err) {
         res.end();

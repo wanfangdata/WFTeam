@@ -204,6 +204,8 @@ definitions:
       hours:
         type: "integer"
         format: "int32"
+      description:
+        type: "string"
 externalDocs:
   description: "接口说明"
   url: "https://github.com/hueidou/WFTeam/blob/master/server/README.md"

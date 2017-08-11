@@ -8,9 +8,9 @@
       <el-table :data="projects">
         <el-table-column prop="projectName" label="项目名">
         </el-table-column>
-        <el-table-column prop="projectKey" label="项目Key">
+        <el-table-column prop="projectKey" label="项目Key" width="160px">
         </el-table-column>
-        <el-table-column prop="hours" label="工时">
+        <el-table-column prop="hours" label="工时" width="80px">
         </el-table-column>
       </el-table>
     </el-card>
