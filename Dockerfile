@@ -8,6 +8,8 @@ COPY . .
 # For npm@5 or later, copy package-lock.json as well
 # COPY package.json package-lock.json .
 
+RUN npm config set registry https://registry.npm.taobao.org
+
 WORKDIR /usr/src/app
 RUN npm install
 RUN npm run build

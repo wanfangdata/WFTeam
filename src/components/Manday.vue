@@ -44,7 +44,7 @@
           <el-col :span="1">&nbsp;</el-col>
           <el-col :span="7">
             <el-form-item prop="hours">
-              <el-input v-model="addForm.hours" max="24" min="1" type="number">
+              <el-input v-model.number="addForm.hours" max="24" min="1" type="number">
                 <template slot="append">H</template>
               </el-input>
             </el-form-item>
