@@ -1,0 +1,11 @@
+sudo: required
+
+language: node_js
+
+services:
+  - docker
+
+before_install:
+  - docker build -f Dockerfile -t wfteam:latest .
+  - docker run --name wfteam -p 8000:8000 -e "MONGODB_CONNECTION=127.0.0.1:27017/wfteam" -d wfteam:latest
+  - docker ps -a
