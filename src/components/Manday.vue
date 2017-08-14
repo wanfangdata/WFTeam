@@ -91,7 +91,7 @@ export default {
       mandayForm: {
         action: 'add',
         _id: '',
-        date: new Date(),
+        date: moment().startOf('day').toDate(),
         projectKey: '',
         hours: 8,
         description: ''
@@ -147,7 +147,6 @@ export default {
     saveManday() {
       this.$refs['mandayForm'].validate((valid) => {
         if (valid) {
-          this.mandayForm.date = moment(this.mandayForm.date).format('YYYY-MM-DD');
           if (this.mandayForm.action == 'add') {
             this.$http.post('/api/manday', this.mandayForm)
               .then(response => {
