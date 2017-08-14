@@ -4,6 +4,9 @@
       <div slot="header" class="card-header">
         <span>项目</span>
         <el-button type="primary" icon="plus" size="mini" style="float:right;" @click="dialogFormVisible = true"></el-button>
+        <el-button type="primary" size="mini" style="float:right;margin-right: 10px;" @click="getProjects()">
+          <i class="fa fa-refresh" style="width: 12px;"></i>
+        </el-button>
       </div>
       <el-table :data="projects">
         <el-table-column prop="projectName" label="项目名">

@@ -1,7 +1,9 @@
 <template>
   <div class="dashboard">
     <el-row type="flex" justify="center" align="middle" style="margin-bottom: 10px;">
-      <h2>({{userName}})</h2>
+      <el-button type="text" title="登出" size="mini" @click="logout()">
+        <h2>({{userName}})</h2>
+      </el-button>
     </el-row>
     <el-row>
       <el-col :span="13" :offset="1">
@@ -44,8 +46,13 @@ export default {
     loginComplete: function (user) {
       this.userName = user.userName;
     },
-    getUserName: function(){
+    getUserName: function () {
       this.userName = localStorage.api_key;
+    },
+    logout: function () {
+      localStorage.removeItem('api_key');
+      delete this.$http.defaults.headers.common['api_key'];
+      this.$router.push('/login');
     }
   }
 }

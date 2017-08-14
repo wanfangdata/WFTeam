@@ -1,7 +1,12 @@
 <template>
   <div class="user">
     <el-card>
-      <div slot="header" class="card-header">成员</div>
+      <div slot="header" class="card-header">
+        <span>成员</span>
+        <el-button type="primary" size="mini" style="float:right;margin-right: 10px;" @click="getUsers()">
+          <i class="fa fa-refresh" style="width: 12px;"></i>
+        </el-button>
+      </div>
   
       <el-table :data="users">
         <el-table-column prop="realName" label="成员">

@@ -4,6 +4,9 @@
       <div slot="header" class="card-header">
         <span>工时</span>
         <el-button type="primary" icon="plus" size="mini" style="float:right;" @click="openMandayForm()"></el-button>
+        <el-button type="primary" size="mini" style="float:right;margin-right: 10px;" @click="getMandays()">
+          <i class="fa fa-refresh" style="width: 12px;"></i>
+        </el-button>
         <el-switch v-model="show" on-text="我" off-text="全部" off-color="#13ce66" on-value="me" off-value="all" style="float: right; margin-right: 10px;"></el-switch>
       </div>
       <el-table :data="mandays" :border="true">
