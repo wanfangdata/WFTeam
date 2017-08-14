@@ -1,5 +1,5 @@
 var url = require('url');
-var db = require('../db/db.js');
+var db = require('../../db/db');
 
 /**
  * 获取工时列表
@@ -17,8 +17,7 @@ module.exports.getMandays = function (req, res, next) {
     .populate('user project')
     .sort({ date: 'desc' })
     .exec(function (err, docs) {
-      res.setHeader('Content-Type', 'application/json');
-      res.end(JSON.stringify(docs, null, 2));
+      res.json(docs);
     });
 };
 
@@ -31,7 +30,7 @@ module.exports.addManday = function (req, res, next) {
 
   db.mandays.findOne({ date: model.date, projectKey: model.projectKey, userName: userName }, function (err, doc) {
     if (!!doc) {
-      res.end();
+      res.json();
     }
     else {
       var manday = new db.mandays();
@@ -42,7 +41,7 @@ module.exports.addManday = function (req, res, next) {
       manday.description = model.description;
 
       manday.save(function (err) {
-        res.end();
+        res.json();
       });
     }
   });
@@ -66,11 +65,11 @@ module.exports.modifyManday = function (req, res, next) {
       doc.description = model.description;
 
       db.mandays.update({ _id: _id }, doc, function (err) {
-        res.end();
+        res.json();
       });
     }
     else {
-      res.end();
+      res.json();
     }
   });
 };
@@ -85,11 +84,11 @@ module.exports.deleteManday = function (req, res, next) {
   db.mandays.findOne({ _id: _id, userName: userName }, function (err, doc) {
     if (!!doc) {
       db.mandays.remove({ _id: _id }, function (err) {
-        res.end();
+        res.json();
       });
     }
     else {
-      res.end();
+      res.json();
     }
   });
 };

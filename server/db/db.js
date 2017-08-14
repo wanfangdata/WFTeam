@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
-
-mongoose.connect('mongodb://' + process.env.MONGODB_CONNECTION);
+mongoose.connect('mongodb://' + process.env.MONGODB_CONNECTION, { useMongoClient: true });
 
 /**
  * 项目
