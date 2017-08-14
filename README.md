@@ -1,6 +1,6 @@
 # WFTeam
 
-[![Build Status](https://travis-ci.org/hueidou/WFTeam.svg?branch=master)](https://travis-ci.org/hueidou/WFTeam)
+[![Build Status](https://travis-ci.org/hueidou/WFTeam.svg?branch=travis)](https://travis-ci.org/hueidou/WFTeam)
 [![dependencies Status](https://david-dm.org/hueidou/wfteam/status.svg)](https://david-dm.org/hueidou/wfteam)
 [![devDependencies Status](https://david-dm.org/hueidou/wfteam/dev-status.svg)](https://david-dm.org/hueidou/wfteam?type=dev)
 
