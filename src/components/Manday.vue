@@ -139,7 +139,7 @@ export default {
       this.$http.get('/api/project')
         .then(response => {
           this.projects = response.data;
-          if (this.projects.length > 0) {
+          if (this.projects.length > 0 && !this.mandayForm.projectKey) {
             this.mandayForm.projectKey = this.projects[0].projectKey;
           }
         });
