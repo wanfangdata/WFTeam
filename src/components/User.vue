@@ -3,16 +3,14 @@
     <el-card>
       <div slot="header" class="card-header">
         <span>成员</span>
-        <el-select v-model="value">
-          <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-          </el-option>
-        </el-select>
-        <el-button type="primary" size="mini" style="float:right;margin-right: 10px;" @click="getUsers()">
+        <el-button type="primary" size="mini" style="float: right; margin-left: 10px;" @click="getUsers()">
           <i class="fa fa-refresh" style="width: 12px;"></i>
         </el-button>
+        <el-switch v-model="day" on-text="今天" off-text="昨天" off-color="#13ce66" on-value="today" off-value="yesterday" style="float: right; margin-right: 10px;">
+        </el-switch>
       </div>
   
-      <el-table :data="users">
+      <el-table :data="users" :row-style="hoursStyle">
         <el-table-column prop="realName" label="成员">
         </el-table-column>
         <el-table-column prop="userName" label="用户名">
@@ -25,47 +23,40 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   name: 'user',
   data() {
     return {
       users: [],
-      options: [
-        {
-          value: '',
-          label: '今天'
-        },
-        {
-          value: '',
-          label: '前一天'
-        },
-        {
-          value: '',
-          label: '本周'
-        },
-        {
-          value: '',
-          label: '上周'
-        },
-        {
-          value: '',
-          label: '本月'
-        },
-      ]
+      day: 'today'
     }
   },
   mounted() {
     this.getUsers();
   },
+  watch: {
+    day: function () {
+      this.getUsers();
+    }
+  },
   methods: {
     getUsers() {
-      this.$http.get('/api/user')
+      let days = {'today': moment().startOf('day').toDate(), 'yesterday': moment().startOf('day').subtract(1, 'd').toDate()}
+
+      this.$http.get('/api/user?day=' + days[this.day].toISOString())
         .then(response => {
           this.users = response.data;
         })
         .catch(error => {
 
         });
+    },
+    hoursStyle(row, index){
+      if (row.hours < 8){
+        return "color: #FF4949;";
+      }
     }
   }
 }

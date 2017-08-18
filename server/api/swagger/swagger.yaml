@@ -58,6 +58,13 @@ paths:
       operationId: "getUsers"
       produces:
       - "application/json"
+      parameters:
+        - name: day
+          in: query
+          description: 显示此天的工时
+          required: true
+          type: string
+          format: date-time
       responses:
         200:
           description: ""

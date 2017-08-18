@@ -41,7 +41,39 @@ module.exports.profileUser = function (req, res, next) {
  * 获取用户列表
  */
 module.exports.getUsers = function (req, res, next) {
-  db.users.find({}, function (err, docs) {
-    res.json(docs);
-  });
+  var day = req.swagger.params.day.value;
+
+  db.mandays
+    .aggregate([
+      {
+        $match:
+        {
+          date: new Date(day)
+        }
+      },
+      {
+        $group:
+        {
+          _id: "$userName",
+          projectCount: { $sum: 1 },
+          hours: { $sum: "$hours" }
+        }
+      }
+    ])
+    .exec(function (err, mandays) {
+      db.users.find({}).exec(function (err, users) {
+        users.forEach(function (user) {
+          var manday = mandays.filter(function (manday) { return manday._id == user.userName; })[0];
+          if (manday) {
+            user.hours = manday.hours;
+            user.projectCount = manday.projectCount;
+          } else {
+            user.hours = 0;
+            user.projectCount = 0;
+          }
+        });
+
+        res.json(users);
+      });
+    });
 };
