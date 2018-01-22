@@ -20,7 +20,7 @@ npm run dev
 ```
 ``` bash
 # 设置MongoDB环境变量
-set MONGODB_CONNECTION=127.0.0.1:27017/wfteam
+export MONGODB_CONNECTION=127.0.0.1:27017/wfteam
 
 # server
 cd server
