@@ -12,7 +12,7 @@
             </el-form>
         </el-card>
     
-        <el-dialog title="完善资料" :visible.sync="profileFormVisible" size="tiny">
+        <el-dialog title="完善资料" :visible.sync="profileFormVisible">
             <el-form :model="profileForm" :rules="profileFormRules" ref="profileForm">
                 <el-form-item label="真实姓名" prop="realName">
                     <el-input v-model="profileForm.realName"></el-input>

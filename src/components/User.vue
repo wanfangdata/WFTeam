@@ -6,7 +6,7 @@
         <el-button type="primary" size="mini" style="float: right; margin-left: 10px;" @click="getUsers()">
           <i class="fa fa-refresh" style="width: 12px;"></i>
         </el-button>
-        <el-switch v-model="day" on-text="今天" off-text="昨天" off-color="#13ce66" on-value="today" off-value="yesterday" style="float: right; margin-right: 10px;">
+        <el-switch v-model="day" active-text="今天" inactive-text="昨天" inactive-color="#13ce66" active-value="today" inactive-value="yesterday" style="float: right; margin-right: 10px;">
         </el-switch>
       </div>
   

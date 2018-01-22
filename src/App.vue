@@ -4,8 +4,8 @@
       <h1>WFTeam 工时</h1>
     </header>
     
-    <CalendarBlockGraph></CalendarBlockGraph>
-    <!-- <router-view></router-view> -->
+    <!-- <CalendarBlockGraph></CalendarBlockGraph> -->
+    <router-view></router-view>
   </div>
 </template>
 

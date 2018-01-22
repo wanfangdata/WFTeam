@@ -3,15 +3,15 @@
     <el-card>
       <div slot="header" class="card-header">
         <span>工时</span>
-        <el-button type="primary" icon="plus" size="mini" style="float:right;" @click="openMandayForm()"></el-button>
+        <el-button type="primary" icon="el-icon-plus" size="mini" style="float:right;" @click="openMandayForm()"></el-button>
         <el-button type="primary" size="mini" style="float:right;margin-right: 10px;" @click="getMandays()">
           <i class="fa fa-refresh" style="width: 12px;"></i>
         </el-button>
-        <el-switch v-model="show" on-text="我" off-text="全部" off-color="#13ce66" on-value="me" off-value="all" style="float: right; margin-right: 10px;"></el-switch>
+        <el-switch v-model="show" active-text="我" inactive-text="全部" inactive-color="#13ce66" active-value="me" inactive-value="all" style="float: right; margin-right: 10px;"></el-switch>
       </div>
       <el-table :data="mandays" :border="true">
         <el-table-column type="expand">
-          <template scope="props">
+          <template slot-scope="props">
             <el-form>
               <el-form-item label="描述：" label-width="60px">
                 <span v-html="props.row.description.replace(/\n/g, '<br />')"></span>
@@ -26,7 +26,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="date" label="日期" width="140px" :formatter="dateFormatter">
-          <template scope="scope">
+          <template slot-scope="scope">
             <span>{{ dateFormatter(null, null, scope.row.date) }}</span>
             <el-tag type="primary" v-if="isToday(scope.row.date)">今</el-tag>
           </template>
@@ -40,7 +40,7 @@
       </el-table>
     </el-card>
   
-    <el-dialog :title="{add: '新增工时', modify: '编辑工时'}[mandayForm.action]" :visible.sync="dialogFormVisible" size="tiny">
+    <el-dialog :title="{add: '新增工时', modify: '编辑工时'}[mandayForm.action]" :visible.sync="dialogFormVisible">
       <el-form :model="mandayForm" :rules="rules" ref="mandayForm">
         <el-form-item label="日期" prop="date" label-width="50px">
           <el-date-picker v-model="mandayForm.date" type="date" placeholder="选择日期">

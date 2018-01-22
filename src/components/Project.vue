@@ -3,7 +3,7 @@
     <el-card>
       <div slot="header" class="card-header">
         <span>项目</span>
-        <el-button type="primary" icon="plus" size="mini" style="float:right;" @click="dialogFormVisible = true"></el-button>
+        <el-button type="primary" icon="el-icon-plus" size="mini" style="float:right;" @click="dialogFormVisible = true"></el-button>
         <el-button type="primary" size="mini" style="float:right;margin-right: 10px;" @click="getProjects()">
           <i class="fa fa-refresh" style="width: 12px;"></i>
         </el-button>
@@ -18,7 +18,7 @@
       </el-table>
     </el-card>
   
-    <el-dialog title="新增项目" :visible.sync="dialogFormVisible" size="tiny">
+    <el-dialog title="新增项目" :visible.sync="dialogFormVisible">
       <el-form :model="addForm" :rules="rules" ref="addForm">
         <el-form-item label="项目名" prop="projectName">
           <el-input v-model="addForm.projectName" auto-complete="off"></el-input>
