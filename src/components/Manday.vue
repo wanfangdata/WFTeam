@@ -18,8 +18,8 @@
               </el-form-item>
               <el-form-item style="text-align:right" v-if="props.row.userName == currentUser">
                 <el-button-group>
-                  <el-button size="small" icon="delete" @click="deleteManday(props.$index, props.row)"></el-button>
-                  <el-button size="small" icon="edit" @click="openMandayForm(props.row)"></el-button>
+                  <el-button size="small" icon="el-icon-delete" @click="deleteManday(props.$index, props.row)"></el-button>
+                  <el-button size="small" icon="el-icon-edit" @click="openMandayForm(props.row)"></el-button>
                 </el-button-group>
               </el-form-item>
             </el-form>
