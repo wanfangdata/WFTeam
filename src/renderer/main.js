@@ -12,6 +12,9 @@ import router from './router'
 //import store from './store'
 
 if (!process.env.IS_WEB) Vue.use(require('vue-electron'))
+
+// 需要加代理，暂时通过这种方式
+axios.defaults.baseURL = 'http://localhost:8080'
 Vue.http = Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
