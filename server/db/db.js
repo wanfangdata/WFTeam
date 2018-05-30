@@ -37,6 +37,19 @@ var mandaySchema = new mongoose.Schema(
 );
 
 /**
+ * 部署
+ */
+var deploySchema = new mongoose.Schema({
+    deployName: String,
+    deployProject: String,
+    deployProjectVersion: String,
+    deployContent: String,
+    createTime: Date,
+    creator: String,
+    deployed: Boolean
+});
+
+/**
  * 外键
  */
 mandaySchema.virtual('user', {
@@ -62,5 +75,6 @@ module.exports = {
     mandaySchema: mandaySchema,
     projects: mongoose.model("projects", projectSchema),
     users: mongoose.model("users", userSchema),
-    mandays: mongoose.model("mandays", mandaySchema)
+    mandays: mongoose.model("mandays", mandaySchema),
+    deploys: mongoose.model("deploys", deploySchema)
 };
