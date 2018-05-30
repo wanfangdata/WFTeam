@@ -16,8 +16,9 @@ cd WFTeam
 npm install
 
 # serve with hot reload at localhost:8080
-npm run dev 
+npm run dev
 ```
+
 ``` bash
 # 设置MongoDB环境变量
 export MONGODB_CONNECTION=127.0.0.1:27017/wfteam
@@ -33,6 +34,7 @@ npm start
 ```
 
 ## Swagger
+
 ``` bash
 # https://www.npmjs.com/package/swagger
 
@@ -58,6 +60,7 @@ docker start wfteam
 ## 其他
 
 建议使用淘宝NPM源：
+
 ``` bash
 npm config set registry https://registry.npm.taobao.org
 ```
