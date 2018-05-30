@@ -1,24 +1,21 @@
 <template>
   <div id="app">
-    <header style="text-align: center;">
-      <h1>WFTeam 工时</h1>
-    </header>
-    
     <!-- <CalendarBlockGraph></CalendarBlockGraph> -->
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
 <script>
-import CalendarBlockGraph from './components/CalendarBlockGraph'
+import CalendarBlockGraph from "./components/CalendarBlockGraph";
 export default {
-  name: 'app',
+  name: "app",
   components: { CalendarBlockGraph }
-}
+};
 </script>
 
 <style>
-#app {}
+#app {
+}
 
 header {
   height: 60px;
@@ -30,5 +27,9 @@ header {
 .el-menu-item {
   height: 30px !important;
   line-height: 30px !important;
+}
+.el-dropdown-link {
+  cursor: pointer;
+  color: #409eff;
 }
 </style>

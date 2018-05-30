@@ -163,6 +163,89 @@ paths:
           description: "新增项目成功"
         400:
           description: "参数不合法"
+  /deploy:
+    get:
+      tags:
+      - "deploy"
+      x-swagger-router-controller: "Deploy"
+      summary: "获取部署列表"
+      description: ""
+      operationId: "getDeploys"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "OK"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Deploy'
+    post:
+      tags:
+      - "deploy"
+      x-swagger-router-controller: "Deploy"
+      summary: "新增部署"
+      description: ""
+      operationId: "addDeploy"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "body"
+        in: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/Deploy"
+      responses:
+        200:
+          description: "新增部署成功"
+        400:
+          description: "参数不合法"
+  /deploy/{_id}:
+    delete:
+      tags:
+      - "deploy"
+      x-swagger-router-controller: "Deploy"
+      summary: "删除部署"
+      description: ""
+      operationId: "deleteDeploy"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "删除部署成功"
+    put:
+      tags:
+      - "deploy"
+      x-swagger-router-controller: "Deploy"
+      summary: "编辑部署"
+      description: ""
+      operationId: "modifyDeploy"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "_id"
+        in: "path"
+        description: ""
+        required: true
+        type: "string"
+      - name: "body"
+        in: "body"
+        description: ""
+        required: true
+        schema:
+          $ref: "#/definitions/Deploy"
+      responses:
+        200:
+          description: "更新部署成功"
+        400:
+          description: "参数不合法"
   /manday:
     get:
       tags:
@@ -294,6 +377,24 @@ definitions:
         type: "string"
       projectName:
         type: "string"
+  Deploy:
+    type: "object"
+    properties:
+      deployName:
+        type: "string"
+      deployProject:
+        type: "string"
+      deployProjectVersion:
+        type: "string"
+      deployContent:
+        type: "string"
+      createTime:
+        type: "string"
+        format: "date-time"
+      creator:
+        type: "string"
+      deployed:
+        type: "boolean"
   Manday:
     type: "object"
     properties:

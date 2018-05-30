@@ -16,3 +16,5 @@ server/public/
 
 # Runtime configuration for swagger app
 config/runtime.yaml
+
+.vs

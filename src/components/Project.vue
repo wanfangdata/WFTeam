@@ -37,35 +37,36 @@
 
 <script>
 export default {
-  name: 'project',
+  name: "project",
   data() {
     return {
       projects: [],
       dialogFormVisible: false,
       addForm: {
-        projectName: '',
-        projectKey: ''
+        projectName: "",
+        projectKey: ""
       },
       rules: {
         projectName: [
-          { required: true, message: '请输入项目名', trigger: 'blur' },
-          { max: 50, message: '长度在 1 到 50 个字符', trigger: 'blur' }
+          { required: true, message: "请输入项目名", trigger: "blur" },
+          { max: 50, message: "长度在 1 到 50 个字符", trigger: "blur" }
         ],
         projectKey: [
-          { required: true, message: '请输入项目Key', trigger: 'blur' },
-          { min: 2, max: 50, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+          { required: true, message: "请输入项目Key", trigger: "blur" },
+          { min: 2, max: 50, message: "长度在 2 到 20 个字符", trigger: "blur" }
         ]
       }
-    }
+    };
   },
   mounted() {
     this.getProjects();
   },
   methods: {
     addProject(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$http.post('/api/project', this.addForm)
+          this.$http
+            .post("/api/project", this.addForm)
             .then(response => {
               this.dialogFormVisible = false;
               this.$refs.addForm.resetFields();
@@ -73,39 +74,36 @@ export default {
             })
             .catch(error => {
               if (error.response) {
-                // The request was made and the server responded with a status code 
-                // that falls out of the range of 2xx 
+                // The request was made and the server responded with a status code
+                // that falls out of the range of 2xx
                 console.log(error.response.data);
                 console.log(error.response.status);
                 console.log(error.response.headers);
               } else if (error.request) {
-                // The request was made but no response was received 
-                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of 
-                // http.ClientRequest in node.js 
+                // The request was made but no response was received
+                // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+                // http.ClientRequest in node.js
                 console.log(error.request);
               } else {
-                // Something happened in setting up the request that triggered an Error 
-                console.log('Error', error.message);
+                // Something happened in setting up the request that triggered an Error
+                console.log("Error", error.message);
               }
               console.log(error.config);
             });
         } else {
-
           return false;
         }
       });
     },
     getProjects() {
-      this.$http.get('/api/project')
-      .then(response => {
+      this.$http.get("/api/project").then(response => {
         this.projects = response.data;
       });
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>
