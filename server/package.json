@@ -13,10 +13,11 @@
   "private": true,
   "dependencies": {
     "connect": "^3.3.5",
-    "swagger-connect": "^0.1.0",
+    "connect-history-api-fallback": "^1.5.0",
     "js-yaml": "^3.3.0",
     "mongoose": "^4.11.6",
-    "serve-static": "^1.12.4"
+    "serve-static": "^1.12.4",
+    "swagger-connect": "^0.1.0"
   },
   "devDependencies": {
     "should": "^7.1.0",

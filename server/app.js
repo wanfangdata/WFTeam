@@ -2,9 +2,11 @@ var path = require('path');
 var serveStatic = require('serve-static');
 var SwaggerConnect = require('swagger-connect');
 var app = require('connect')();
+var history = require('connect-history-api-fallback');
 module.exports = app; // for testing
 
 app.use(serveStatic(path.join(__dirname, 'public')));
+app.use(history());
 
 var config = {
   appRoot: __dirname // required config
