@@ -13,7 +13,7 @@
           <template slot-scope="props">
             <el-form>
               <el-form-item label="部署内容：" label-width="100px">
-                <span>{{ props.row.deployContent }}</span>
+                <vue-markdown class="markdown-body">{{ props.row.deployContent }}</vue-markdown>
               </el-form-item>
               <el-form-item style="text-align:right">
                 <el-button-group>
@@ -73,9 +73,13 @@
 
 <script>
 import moment from "moment";
+import VueMarkdown from "vue-markdown";
 
 export default {
   name: "deploy",
+  components: {
+    VueMarkdown
+  },
   data() {
     return {
       deploys: [],

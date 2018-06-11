@@ -6,6 +6,7 @@ import axios from 'axios'
 import 'element-ui/lib/theme-chalk/index.css'
 import 'element-ui/lib/theme-chalk/reset.css'
 import 'font-awesome/css/font-awesome.css'
+import 'github-markdown-css/github-markdown.css'
 import App from './App'
 import router from './router'
 

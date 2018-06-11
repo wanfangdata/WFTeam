@@ -14,7 +14,7 @@
           <template slot-scope="props">
             <el-form>
               <el-form-item label="描述：" label-width="60px">
-                <span v-html="props.row.description.replace(/\n/g, '<br />')"></span>
+                <vue-markdown class="markdown-body">{{ props.row.description }}</vue-markdown>
               </el-form-item>
               <el-form-item style="text-align:right" v-if="props.row.userName == currentUser">
                 <el-button-group>
@@ -79,9 +79,13 @@
 
 <script>
 import moment from 'moment'
+import VueMarkdown from "vue-markdown";
 
 export default {
   name: 'manday',
+  components: {
+    VueMarkdown
+  },
   data() {
     return {
       currentUser: '',
