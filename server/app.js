@@ -5,6 +5,7 @@ var app = require('connect')();
 var history = require('connect-history-api-fallback');
 module.exports = app; // for testing
 
+// https://github.com/bripkens/connect-history-api-fallback/blob/master/examples/static-files-and-index-rewrite/README.md#configuring-the-middleware
 // use serveStatic first, history fallback not work.
 // app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(history());
