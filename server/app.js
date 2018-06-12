@@ -15,7 +15,7 @@ var config = {
   appRoot: __dirname // required config
 };
 
-SwaggerConnect.create(config, function(err, swaggerConnect) {
+SwaggerConnect.create(config, function (err, swaggerConnect) {
   if (err) { throw err; }
 
   // install middleware

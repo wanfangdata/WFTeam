@@ -23,46 +23,52 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from "moment";
 
 export default {
-  name: 'user',
+  name: "user",
   data() {
     return {
       users: [],
-      day: 'today'
-    }
+      day: "today"
+    };
   },
   mounted() {
     this.getUsers();
   },
   watch: {
-    day: function () {
+    day: function() {
       this.getUsers();
     }
   },
   methods: {
     getUsers() {
-      let days = {'today': moment().startOf('day').toDate(), 'yesterday': moment().startOf('day').subtract(1, 'd').toDate()}
+      let days = {
+        today: moment()
+          .startOf("day")
+          .toDate(),
+        yesterday: moment()
+          .startOf("day")
+          .subtract(1, "d")
+          .toDate()
+      };
 
-      this.$http.get('/api/user?day=' + days[this.day].toISOString())
+      this.$http
+        .get("/api/user?day=" + days[this.day].toISOString())
         .then(response => {
           this.users = response.data;
         })
-        .catch(error => {
-
-        });
+        .catch(error => {});
     },
-    hoursStyle(row, index){
-      if (row.hours < 8){
+    hoursStyle(row, index) {
+      if (row.hours < 8) {
         return "color: #FF4949;";
       }
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
 </style>

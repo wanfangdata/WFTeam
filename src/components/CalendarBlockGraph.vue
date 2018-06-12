@@ -47,14 +47,12 @@
 </template>
 
 <script>
-import moment from 'moment'
-import _ from 'lodash'
+import moment from "moment";
+import _ from "lodash";
 
 export default {
-  month: moment().startOf('month'),
-  mandays: [
-    '2017-08-01'
-  ],
+  month: moment().startOf("month"),
+  mandays: ["2017-08-01"],
   computed: {
     calendarBlocks: function() {
       // 根据月份划分week，记录date、hours
@@ -63,13 +61,12 @@ export default {
       var fooDaysCount = month.day();
       if (fooDaysCount == 0) {
         fooDaysCount = 6;
-      }
-      else {
+      } else {
         fooDaysCount = fooDaysCount - 1;
       }
 
       for (var i = 0; i < fooDaysCount; i++) {
-        mandays.shift(undefined);        
+        mandays.shift(undefined);
       }
 
       var weeks = _.chunk(mandays, 7);
@@ -77,7 +74,7 @@ export default {
       return weeks;
     }
   }
-}
+};
 </script>
 
 <style>

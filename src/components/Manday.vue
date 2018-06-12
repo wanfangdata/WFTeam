@@ -78,48 +78,58 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from "moment";
 import VueMarkdown from "vue-markdown";
 
 export default {
-  name: 'manday',
+  name: "manday",
   components: {
     VueMarkdown
   },
   data() {
     return {
-      currentUser: '',
-      show: 'me',
+      currentUser: "",
+      show: "me",
       mandays: [],
       dialogFormVisible: false,
       mandayForm: {
-        action: 'add',
-        _id: '',
-        date: moment().startOf('day').toDate(),
-        projectKey: '',
+        action: "add",
+        _id: "",
+        date: moment()
+          .startOf("day")
+          .toDate(),
+        projectKey: "",
         hours: 8,
-        description: ''
+        description: ""
       },
       rules: {
         date: [
-          { type: 'date', required: true, message: '日期不能为空', trigger: 'blur' }
+          {
+            type: "date",
+            required: true,
+            message: "日期不能为空",
+            trigger: "blur"
+          }
         ],
-        projectKey: [
-          { required: true, message: '项目必选', trigger: 'blur' }
-        ],
+        projectKey: [{ required: true, message: "项目必选", trigger: "blur" }],
         hours: [
-          { type: 'number', required: true, message: '工时不能为空', trigger: 'blur' }
+          {
+            type: "number",
+            required: true,
+            message: "工时不能为空",
+            trigger: "blur"
+          }
         ]
       },
       projects: [],
-      dateFormatter: function (row, column, cellValue) {
-        return moment(cellValue).format('YYYY-MM-DD');
+      dateFormatter: function(row, column, cellValue) {
+        return moment(cellValue).format("YYYY-MM-DD");
       },
       today: new Date()
-    }
+    };
   },
   watch: {
-    show: function () {
+    show: function() {
       this.getMandays();
     }
   },
@@ -131,36 +141,33 @@ export default {
   },
   methods: {
     isToday(date) {
-      return moment(date).isSame(this.today, 'day');
+      return moment(date).isSame(this.today, "day");
     },
     getMandays() {
-      this.$http.get('/api/manday?show=' + this.show)
-        .then(response => {
-          this.mandays = response.data;
-        });
+      this.$http.get("/api/manday?show=" + this.show).then(response => {
+        this.mandays = response.data;
+      });
     },
     getProjects() {
-      this.$http.get('/api/project')
-        .then(response => {
-          this.projects = response.data;
-          if (this.projects.length > 0 && !this.mandayForm.projectKey) {
-            this.mandayForm.projectKey = this.projects[0].projectKey;
-          }
-        });
+      this.$http.get("/api/project").then(response => {
+        this.projects = response.data;
+        if (this.projects.length > 0 && !this.mandayForm.projectKey) {
+          this.mandayForm.projectKey = this.projects[0].projectKey;
+        }
+      });
     },
     saveManday() {
-      this.$refs['mandayForm'].validate((valid) => {
+      this.$refs["mandayForm"].validate(valid => {
         if (valid) {
-          if (this.mandayForm.action == 'add') {
-            this.$http.post('/api/manday', this.mandayForm)
-              .then(response => {
-                this.dialogFormVisible = false;
-                this.$refs.mandayForm.resetFields();
-                this.getMandays();
-              });
-          }
-          else {
-            this.$http.put('/api/manday/' + this.mandayForm._id, this.mandayForm)
+          if (this.mandayForm.action == "add") {
+            this.$http.post("/api/manday", this.mandayForm).then(response => {
+              this.dialogFormVisible = false;
+              this.$refs.mandayForm.resetFields();
+              this.getMandays();
+            });
+          } else {
+            this.$http
+              .put("/api/manday/" + this.mandayForm._id, this.mandayForm)
               .then(response => {
                 this.dialogFormVisible = false;
                 this.$refs.mandayForm.resetFields();
@@ -182,25 +189,23 @@ export default {
         this.mandayForm.projectKey = row.projectKey;
         this.mandayForm.hours = row.hours;
         this.mandayForm.description = row.description;
-      }
-      else {
+      } else {
         this.mandayForm.action = "add";
       }
 
       this.dialogFormVisible = true;
     },
     deleteManday(index, row) {
-      this.$http.delete('/api/manday/' + row._id)
-        .then(response => {
-          this.$message({
-            type: 'success',
-            message: '删除成功'
-          });
-          this.getMandays();
+      this.$http.delete("/api/manday/" + row._id).then(response => {
+        this.$message({
+          type: "success",
+          message: "删除成功"
         });
+        this.getMandays();
+      });
     }
   }
-}
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

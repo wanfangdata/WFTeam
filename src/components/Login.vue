@@ -27,97 +27,98 @@
 </template>
 
 <script>
-import bus from '../bus.js';
+import bus from "../bus.js";
 
 export default {
-    data() {
-        return {
-            loginForm: {
-                userName: ''
-            },
-            loginFormRules: {
-                userName: [
-                    { required: true, message: '请输入用户名', trigger: 'blur' },
-                    { min: 3, max: 50, message: '长度在 3 到 50 个字符', trigger: 'blur' }
-                ]
-            },
-            profileFormVisible: false,
-            profileForm: {
-                realName: ''
-            },
-            profileFormRules: {
-                realName: [
-                    { required: true, message: '请输入真实姓名', trigger: 'blur' },
-                    { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
-                ]
-            }
-        };
-    },
-    mounted() { },
-    methods: {
-        login() {
-            this.$refs['loginForm'].validate((valid) => {
-                if (valid) {
-                    this.$http.post('/api/user/login', this.loginForm)
-                        .then(response => {
-                            let user = response.data;
+  data() {
+    return {
+      loginForm: {
+        userName: ""
+      },
+      loginFormRules: {
+        userName: [
+          { required: true, message: "请输入用户名", trigger: "blur" },
+          { min: 3, max: 50, message: "长度在 3 到 50 个字符", trigger: "blur" }
+        ]
+      },
+      profileFormVisible: false,
+      profileForm: {
+        realName: ""
+      },
+      profileFormRules: {
+        realName: [
+          { required: true, message: "请输入真实姓名", trigger: "blur" },
+          { min: 2, max: 20, message: "长度在 2 到 20 个字符", trigger: "blur" }
+        ]
+      }
+    };
+  },
+  mounted() {},
+  methods: {
+    login() {
+      this.$refs["loginForm"].validate(valid => {
+        if (valid) {
+          this.$http
+            .post("/api/user/login", this.loginForm)
+            .then(response => {
+              let user = response.data;
 
-                            // 保存认证信息
-                            localStorage.api_key = user.userName;
-                            this.$http.defaults.headers.common['api_key'] = user.userName;
+              // 保存认证信息
+              localStorage.api_key = user.userName;
+              this.$http.defaults.headers.common["api_key"] = user.userName;
 
-                            if (!user.realName) {
-                                this.profileFormVisible = true;
-                                return false;
-                            }
-                            else {
-                                this.$notify({
-                                    message: '正在登入...',
-                                    type: 'success'
-                                });
-                                bus.$emit('loginComplete', user);
-                                this.$router.push('/');
-                            }
-                        })
-                        .catch(error => {
-                            console.log(error);
-                        });
-                }
-                else {
-                    return false;
-                }
+              if (!user.realName) {
+                this.profileFormVisible = true;
+                return false;
+              } else {
+                this.$notify({
+                  message: "正在登入...",
+                  type: "success"
+                });
+                bus.$emit("loginComplete", user);
+                this.$router.push("/");
+              }
+            })
+            .catch(error => {
+              console.log(error);
             });
-        },
-        completeProfile() {
-            this.$refs['profileForm'].validate((valid) => {
-                if (valid) {
-                    this.$http.put('/api/user/profile', this.profileForm)
-                        .then(response => {
-                            this.$notify({
-                                message: '正在登入...',
-                                type: 'success'
-                            });
-                            bus.$emit('loginComplete', { userName: this.loginForm.userName, realName: this.profileForm.realName });
-                            this.$router.push('/');
-                        })
-                        .catch(error => {
-                            console.log(error);
-
-                        });
-                }
-                else {
-                    return false;
-                }
-            });
+        } else {
+          return false;
         }
+      });
+    },
+    completeProfile() {
+      this.$refs["profileForm"].validate(valid => {
+        if (valid) {
+          this.$http
+            .put("/api/user/profile", this.profileForm)
+            .then(response => {
+              this.$notify({
+                message: "正在登入...",
+                type: "success"
+              });
+              bus.$emit("loginComplete", {
+                userName: this.loginForm.userName,
+                realName: this.profileForm.realName
+              });
+              this.$router.push("/");
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        } else {
+          return false;
+        }
+      });
     }
-}
+  }
+};
 </script>
 
 <style>
 .login {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

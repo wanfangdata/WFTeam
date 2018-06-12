@@ -14,9 +14,6 @@ export default {
 </script>
 
 <style>
-#app {
-}
-
 header {
   height: 60px;
   display: flex;
@@ -28,6 +25,7 @@ header {
   height: 30px !important;
   line-height: 30px !important;
 }
+
 .el-dropdown-link {
   cursor: pointer;
   color: #409eff;

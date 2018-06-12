@@ -20,23 +20,23 @@ export default new Router({
       component: Main,
       children: [
         {
-          path:'',
+          path: '',
           component: Dashboard
         },
         {
-          path:'manday',
+          path: 'manday',
           component: Manday
         },
         {
-          path:'project',
+          path: 'project',
           component: Project
         },
         {
-          path:'user',
+          path: 'user',
           component: User
         },
         {
-          path:'deploy',
+          path: 'deploy',
           component: Deploy,
           children: [
             {
