@@ -5,8 +5,10 @@ var app = require('connect')();
 var history = require('connect-history-api-fallback');
 module.exports = app; // for testing
 
-app.use(serveStatic(path.join(__dirname, 'public')));
+// use serveStatic first, history fallback not work.
+// app.use(serveStatic(path.join(__dirname, 'public')));
 app.use(history());
+app.use(serveStatic(path.join(__dirname, 'public')));
 
 var config = {
   appRoot: __dirname // required config
