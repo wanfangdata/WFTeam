@@ -1,21 +1,24 @@
-FROM node:boron
-
-# Create app directory
-WORKDIR /usr/src/app
-
-# Install app dependencies
-COPY . .
-# For npm@5 or later, copy package-lock.json as well
-# COPY package.json package-lock.json .
+FROM node:6-alpine
 
 RUN npm config set registry https://registry.npm.taobao.org
 
-WORKDIR /usr/src/app
+# Create app directory
+# Install app dependencies
+# For npm@5 or later, copy package-lock.json as well
+# COPY package.json package-lock.json .
+WORKDIR /app
+COPY package.json package-lock.json ./
 RUN npm install
-RUN npm run build
 
-WORKDIR /usr/src/app/server
+WORKDIR /app/server
+COPY package.json package-lock.json ./
 RUN npm install
+
+# 先生成依赖层（容量大，且不经常变动），再拷贝程序
+WORKDIR /app
+COPY . .
+
+RUN npm run build
 
 EXPOSE 8000
 CMD [ "npm", "start" ]
