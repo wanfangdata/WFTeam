@@ -17,8 +17,8 @@ RUN npm install
 # 先生成依赖层（容量大，且不经常变动），再拷贝程序
 WORKDIR /app
 COPY . .
-
 RUN npm run build
 
+WORKDIR /app/server
 EXPOSE 8000
 CMD [ "npm", "start" ]
