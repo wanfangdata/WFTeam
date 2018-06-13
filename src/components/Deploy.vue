@@ -37,11 +37,12 @@
         </el-table-column>
         <el-table-column prop="creator" label="创建人" width="160px">
         </el-table-column>
-        <el-table-column prop="deployed" label="已部署" width="80px">
+        <el-table-column prop="deployed" label="已部署" width="80px" align="center">
           <template slot-scope="scope">
-            <span>{{ scope.row.deployed }}</span>
+            <i style="color: green;" class="el-icon-success" v-if="scope.row.deployed"></i>
+            <i style="color: red; font-size: large; font-weight: bold;" class="el-icon-loading" v-if="!scope.row.deployed"></i>
           </template>
-        </el-table-column>        
+        </el-table-column>
       </el-table>
     </el-card>
   
