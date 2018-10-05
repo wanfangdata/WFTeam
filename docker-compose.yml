@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  web:
+    image: hueidou/wfteam
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    environment:
+      - MONGODB_CONNECTION=mongo:27017/wfteam
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "~/data/configdb:/data/configdb"
+      - "~/data/db:/data/db"
