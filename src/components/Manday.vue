@@ -8,6 +8,7 @@
           <i class="fa fa-refresh" style="width: 12px;"></i>
         </el-button>
         <el-switch v-model="show" active-text="我" inactive-text="全部" inactive-color="#13ce66" active-value="me" inactive-value="all" style="float: right; margin-right: 10px;"></el-switch>
+        <el-date-picker v-model="month" type="month" size="mini" :clearable=false style="float: right; margin-right: 10px;"></el-date-picker>
       </div>
       <el-table :data="mandays" :border="true">
         <el-table-column type="expand">
@@ -90,14 +91,13 @@ export default {
     return {
       currentUser: "",
       show: "me",
+      month: moment().startOf('month').toDate(),
       mandays: [],
       dialogFormVisible: false,
       mandayForm: {
         action: "add",
         _id: "",
-        date: moment()
-          .startOf("day")
-          .toDate(),
+        date: moment().startOf("day").toDate(),
         projectKey: "",
         hours: 8,
         description: ""
@@ -131,6 +131,9 @@ export default {
   watch: {
     show: function() {
       this.getMandays();
+    },
+    month: function() {
+      this.getMandays();
     }
   },
   mounted() {
@@ -144,7 +147,10 @@ export default {
       return moment(date).isSame(this.today, "day");
     },
     getMandays() {
-      this.$http.get("/api/manday?show=" + this.show).then(response => {
+      var startAt = moment(this.month).format();
+      var endAt = moment(this.month).add(1, 'months').format();
+      this.$http.get("/api/manday?show=" + this.show + "&startAt=" + encodeURIComponent(startAt) + "&endAt=" + encodeURIComponent(endAt))
+      .then(response => {
         this.mandays = response.data;
       });
     },

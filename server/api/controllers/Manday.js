@@ -6,9 +6,11 @@ var db = require('../../db/db');
  */
 module.exports.getMandays = function (req, res, next) {
   var show = req.swagger.params["show"].value;
+  var startAt = req.swagger.params["startAt"].value;
+  var endAt = req.swagger.params["endAt"].value;
   var userName = req.headers["api_key"];
 
-  var filter = {};
+  var filter = { date: { $gte: startAt, $lt: endAt } };
   if (show == "me") {
     filter["userName"] = userName;
   }
