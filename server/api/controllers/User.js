@@ -29,7 +29,7 @@ module.exports.loginUser = function (req, res, next) {
  * 完善用户信息
  */
 module.exports.profileUser = function (req, res, next) {
-  var userName = req.headers["api_key"];
+  var userName = req.headers["apikey"];
   var realName = req.body.realName;
 
   db.users.update({ userName: userName }, { realName: realName }, function (err) {

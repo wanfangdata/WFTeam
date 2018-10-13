@@ -16,7 +16,7 @@ module.exports.getDeploys = function (req, res, next) {
  */
 module.exports.addDeploy = function (req, res, next) {
   var model = req.swagger.params.body.value;
-  var userName = req.headers["api_key"];
+  var userName = req.headers["apikey"];
 
   var deploy = new db.deploys();
   deploy.deployName = model.deployName;

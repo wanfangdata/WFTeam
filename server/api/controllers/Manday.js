@@ -8,7 +8,7 @@ module.exports.getMandays = function (req, res, next) {
   var show = req.swagger.params["show"].value;
   var startAt = req.swagger.params["startAt"].value;
   var endAt = req.swagger.params["endAt"].value;
-  var userName = req.headers["api_key"];
+  var userName = req.headers["apikey"];
 
   var filter = { date: { $gte: startAt, $lt: endAt } };
   if (show == "me") {
@@ -28,7 +28,7 @@ module.exports.getMandays = function (req, res, next) {
  */
 module.exports.addManday = function (req, res, next) {
   var model = req.swagger.params.body.value;
-  var userName = req.headers["api_key"];
+  var userName = req.headers["apikey"];
 
   db.mandays.findOne({ date: model.date, projectKey: model.projectKey, userName: userName }, function (err, doc) {
     if (!!doc) {
@@ -55,7 +55,7 @@ module.exports.addManday = function (req, res, next) {
 module.exports.modifyManday = function (req, res, next) {
   var _id = req.swagger.params._id.value;
   var model = req.swagger.params.body.value;
-  var userName = req.headers["api_key"];
+  var userName = req.headers["apikey"];
 
   db.mandays.findOne({ _id: _id, userName: userName }, function (err, doc) {
     if (!!doc) {
@@ -81,7 +81,7 @@ module.exports.modifyManday = function (req, res, next) {
  */
 module.exports.deleteManday = function (req, res, next) {
   var _id = req.swagger.params._id.value;
-  var userName = req.headers["api_key"];
+  var userName = req.headers["apikey"];
 
   db.mandays.findOne({ _id: _id, userName: userName }, function (err, doc) {
     if (!!doc) {

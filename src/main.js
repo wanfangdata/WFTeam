@@ -20,15 +20,15 @@ Vue.prototype.$http = axios;
 // });
 router.beforeEach((to, from, next) => {
   // 判断用户登录状态
-  if (!localStorage.api_key && to.name != 'Login') {
+  if (!localStorage.apikey && to.name != 'Login') {
     next('/login');
   }
-  else if (!!localStorage.api_key && to.name == 'Login') {
-    axios.defaults.headers.common['api_key'] = localStorage.api_key;
+  else if (!!localStorage.apikey && to.name == 'Login') {
+    axios.defaults.headers.common['apikey'] = localStorage.apikey;
     next('/');
   }
   else {
-    axios.defaults.headers.common['api_key'] = localStorage.api_key;
+    axios.defaults.headers.common['apikey'] = localStorage.apikey;
     next();
   }
 });

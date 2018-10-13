@@ -348,9 +348,9 @@ paths:
         400:
           description: "参数不合法"
 securityDefinitions:
-  api_key:
+  apikey:
     type: "apiKey"
-    name: "api_key"
+    name: "apikey"
     in: "header"
 definitions:
   HelloWorldResponse:

@@ -69,7 +69,7 @@ export default {
       this.userName = user.userName;
     },
     getUserName: function() {
-      this.userName = localStorage.api_key;
+      this.userName = localStorage.apikey;
     },
     handleCommand(command) {
       switch (command) {
@@ -78,8 +78,8 @@ export default {
       }
     },
     logout: function() {
-      localStorage.removeItem("api_key");
-      delete this.$http.defaults.headers.common["api_key"];
+      localStorage.removeItem("apikey");
+      delete this.$http.defaults.headers.common["apikey"];
       this.$router.push("/login");
     }
   }

@@ -64,8 +64,8 @@ export default {
               let user = response.data;
 
               // 保存认证信息
-              localStorage.api_key = user.userName;
-              this.$http.defaults.headers.common["api_key"] = user.userName;
+              localStorage.apikey = user.userName;
+              this.$http.defaults.headers.common["apikey"] = user.userName;
 
               if (!user.realName) {
                 this.profileFormVisible = true;

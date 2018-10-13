@@ -140,7 +140,7 @@ export default {
     this.getMandays();
     this.getProjects();
 
-    this.currentUser = localStorage.api_key;
+    this.currentUser = localStorage.apikey;
   },
   methods: {
     isToday(date) {
