@@ -1,17 +1,8 @@
 <template>
   <div id="app">
-    <!-- <CalendarBlockGraph></CalendarBlockGraph> -->
-      <router-view></router-view>
+      <router-view/>
   </div>
 </template>
-
-<script>
-import CalendarBlockGraph from "./components/CalendarBlockGraph";
-export default {
-  name: "app",
-  components: { CalendarBlockGraph }
-};
-</script>
 
 <style>
 header {
