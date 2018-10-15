@@ -15,7 +15,7 @@ FROM node:alpine
 
 WORKDIR /app
 COPY --from=build-env /src/server/package.json /src/server/package-lock.json ./
-RUN npm install --registry=http://registry.npm.taobao.org && npm cache clean
+RUN npm install --registry=http://registry.npm.taobao.org && npm cache verify
 
 COPY --from=build-env /src/server .
 
