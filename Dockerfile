@@ -1,5 +1,5 @@
 # 构建阶段
-FROM node:6-alpine as build-env
+FROM node:alpine as build-env
 
 WORKDIR /src
 
@@ -11,7 +11,7 @@ COPY . .
 RUN npm run build
 
 # 发布阶段
-FROM node:6-alpine
+FROM node:alpine
 
 WORKDIR /app
 COPY --from=build-env /src/server/package.json /src/server/package-lock.json ./
