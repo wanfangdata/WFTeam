@@ -1,12 +1,10 @@
 module.exports = {
   outputDir: 'server/public',
-  pluginOptions: {
+  devServer: {
     proxy: {
-        context: '/api',
-        options: {
-            target: 'http://localhost:8000/api',
-            changeOrigin: true
-        }
+      '/api': {
+        target: 'http://localhost:8000'
+      }
     }
   }
 }
