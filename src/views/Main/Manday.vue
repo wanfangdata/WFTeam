@@ -14,14 +14,14 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form>
-              <el-form-item label="描述：" label-width="60px">
-                <div v-html="markdownToHtml(props.row.description)"></div>
-              </el-form-item>
               <el-form-item style="text-align:right" v-if="props.row.userName == currentUser">
                 <el-button-group>
                   <el-button size="small" icon="el-icon-delete" @click="deleteManday(props.$index, props.row)"></el-button>
                   <el-button size="small" icon="el-icon-edit" @click="openMandayForm(props.row)"></el-button>
                 </el-button-group>
+              </el-form-item>
+              <el-form-item label="描述：" label-width="60px">
+                <div v-html="markdownToHtml(props.row.description)" class="markdown-body"></div>
               </el-form-item>
             </el-form>
           </template>
@@ -66,8 +66,15 @@
           </el-col>
         </el-form-item>
         <el-form-item label="描述" prop="description" label-width="50px">
-          <el-input v-model="mandayForm.description" type="textarea" style="width: 300px;" :autosize="{ minRows: 4, maxRows: 10 }">
-          </el-input>
+          <el-tabs type="border-card" v-model="descriptionTab">
+            <el-tab-pane label="Write" name="write">
+              <el-input v-model="mandayForm.description" type="textarea" :autosize="{ minRows: 4, maxRows: 10 }">
+              </el-input>
+            </el-tab-pane>
+            <el-tab-pane label="Preview" name="preview">
+              <div v-html="markdownToHtml(mandayForm.description)" class="markdown-body"></div>
+            </el-tab-pane>
+          </el-tabs>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -123,7 +130,8 @@ export default {
       dateFormatter: function(row, column, cellValue) {
         return moment(cellValue).format("YYYY-MM-DD");
       },
-      today: new Date()
+      today: new Date(),
+      descriptionTab: "write"
     };
   },
   watch: {

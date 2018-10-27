@@ -12,14 +12,14 @@
         <el-table-column type="expand">
           <template slot-scope="props">
             <el-form>
-              <el-form-item label="部署内容：" label-width="100px">
-                <div v-html="markdownToHtml(props.row.deployContent)"></div>
-              </el-form-item>
               <el-form-item style="text-align:right">
                 <el-button-group>
                   <el-button size="small" icon="el-icon-delete" @click="deleteDeploy(props.$index, props.row)"></el-button>
                   <el-button size="small" icon="el-icon-edit" @click="openDeployForm(props.row)"></el-button>
                 </el-button-group>
+              </el-form-item>
+              <el-form-item label="部署内容：" label-width="100px">
+                <div v-html="markdownToHtml(props.row.deployContent)" class="markdown-body"></div>
               </el-form-item>
             </el-form>
           </template>
@@ -61,7 +61,14 @@
           <el-switch v-model="deployForm.deployed"></el-switch>
         </el-form-item>
         <el-form-item label="部署内容" prop="deployContent" label-width="120px">
-          <el-input v-model="deployForm.deployContent" type="textarea" style="width: 300px;" :autosize="{ minRows: 4, maxRows: 10 }"></el-input>
+          <el-tabs type="border-card" v-model="deployContentTab">
+            <el-tab-pane label="Write" name="write">
+              <el-input v-model="deployForm.deployContent" type="textarea" :autosize="{ minRows: 4, maxRows: 10 }"></el-input>
+            </el-tab-pane>
+            <el-tab-pane label="Preview" name="preview">
+              <div v-html="markdownToHtml(deployForm.deployContent)" class="markdown-body"></div>
+            </el-tab-pane>
+          </el-tabs>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -118,7 +125,8 @@ export default {
       },
       dateFormatter: function(row, column, cellValue) {
         return moment(cellValue).format("YYYY-MM-DD HH:mm");
-      }
+      },
+      deployContentTab: "write"
     };
   },
   mounted() {
