@@ -11,20 +11,29 @@
       <el-table :data="projects">
         <el-table-column prop="projectName" label="项目名">
         </el-table-column>
-        <el-table-column prop="projectKey" label="项目Key" width="160px">
+        <el-table-column prop="projectKey" label="项目Key">
         </el-table-column>
         <el-table-column prop="hours" label="工时" width="80px">
+        </el-table-column>
+        <el-table-column prop="projectStatus" label="项目状态" width="80px">
         </el-table-column>
       </el-table>
     </el-card>
   
     <el-dialog title="新增项目" :visible.sync="dialogFormVisible">
-      <el-form :model="addForm" :rules="rules" ref="addForm">
+      <el-form :model="addForm" :rules="rules" ref="addForm" label-width="80px">
         <el-form-item label="项目名" prop="projectName">
           <el-input v-model="addForm.projectName" auto-complete="off"></el-input>
         </el-form-item>
         <el-form-item label="项目Key" prop="projectKey">
           <el-input v-model="addForm.projectKey" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="项目状态" prop="projectStatus">
+          <el-radio-group v-model="addForm.projectStatus" size="mini">
+            <el-radio-button label="ToDo">ToDo</el-radio-button>
+            <el-radio-button label="InProgress">InProgress</el-radio-button>
+            <el-radio-button label="Done">Done</el-radio-button>
+          </el-radio-group>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -46,7 +55,8 @@ export default {
       dialogFormVisible: false,
       addForm: {
         projectName: "",
-        projectKey: ""
+        projectKey: "",
+        projectStatus: "ToDo"
       },
       rules: {
         projectName: [
@@ -56,6 +66,9 @@ export default {
         projectKey: [
           { required: true, message: "请输入项目Key", trigger: "blur" },
           { min: 2, max: 50, message: "长度在 2 到 20 个字符", trigger: "blur" }
+        ],
+        projectStatus: [
+          { required: true }
         ]
       }
     };

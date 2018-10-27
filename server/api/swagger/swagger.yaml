@@ -353,6 +353,18 @@ securityDefinitions:
     name: "apikey"
     in: "header"
 definitions:
+  ProjectStatus:
+    type: "string"
+    enum: &PROJECTSTATUS
+      - ToDo
+      - InProgress
+      - Done
+    description: >
+      * ToDo - To Do
+      
+      * InProgress - In Progress
+      
+      * Done - Done
   HelloWorldResponse:
     required:
       - message
@@ -389,6 +401,9 @@ definitions:
         type: "string"
       projectName:
         type: "string"
+      projectStatus:
+        type: "string"
+        enum: *PROJECTSTATUS
   Deploy:
     type: "object"
     properties:

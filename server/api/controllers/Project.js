@@ -21,6 +21,7 @@ module.exports.addProject = function (req, res, next) {
       var project = new db.projects();
       project.projectKey = model.projectKey;
       project.projectName = model.projectName;
+      project.projectStatus = model.projectStatus;
 
       project.save(function (err) {
         res.json();

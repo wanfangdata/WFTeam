@@ -8,6 +8,7 @@ mongoose.connect('mongodb://' + process.env.MONGODB_CONNECTION, { useMongoClient
 var projectSchema = new mongoose.Schema({
     projectKey: String,
     projectName: String,
+    projectStatus: String,
     hours: Number
 });
 
