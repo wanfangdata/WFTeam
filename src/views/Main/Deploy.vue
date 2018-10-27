@@ -13,7 +13,7 @@
           <template slot-scope="props">
             <el-form>
               <el-form-item label="部署内容：" label-width="100px">
-                <vue-markdown class="markdown-body">{{ props.row.deployContent }}</vue-markdown>
+                <div v-html="markdownToHtml(props.row.deployContent)"></div>
               </el-form-item>
               <el-form-item style="text-align:right">
                 <el-button-group>
@@ -75,13 +75,10 @@
 <script>
 import { Component, Vue } from "vue-property-decorator";
 import moment from "moment";
-import VueMarkdown from "vue-markdown";
+import marked from "marked";
 
 export default {
   name: "deploy",
-  components: {
-    VueMarkdown
-  },
   data() {
     return {
       deploys: [],
@@ -128,6 +125,9 @@ export default {
     this.getDeploys();
   },
   methods: {
+    markdownToHtml(markdown) {
+      return marked(markdown);
+    },
     getDeploys() {
       this.$http.get("/api/deploy").then(response => {
         this.deploys = response.data;

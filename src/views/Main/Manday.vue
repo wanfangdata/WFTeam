@@ -15,7 +15,7 @@
           <template slot-scope="props">
             <el-form>
               <el-form-item label="描述：" label-width="60px">
-                <vue-markdown class="markdown-body">{{ props.row.description }}</vue-markdown>
+                <div v-html="markdownToHtml(props.row.description)"></div>
               </el-form-item>
               <el-form-item style="text-align:right" v-if="props.row.userName == currentUser">
                 <el-button-group>
@@ -81,13 +81,10 @@
 <script>
 import { Component, Vue } from 'vue-property-decorator';
 import moment from "moment";
-import VueMarkdown from "vue-markdown";
+import marked from "marked";
 
 export default {
   name: "manday",
-  components: {
-    VueMarkdown
-  },
   data() {
     return {
       currentUser: "",
@@ -144,6 +141,9 @@ export default {
     this.currentUser = localStorage.apikey;
   },
   methods: {
+    markdownToHtml(markdown) {
+      return marked(markdown);
+    },
     isToday(date) {
       return moment(date).isSame(this.today, "day");
     },
