@@ -67,11 +67,11 @@
         </el-form-item>
         <el-form-item label="描述" prop="description" label-width="50px">
           <el-tabs type="border-card" v-model="descriptionTab">
-            <el-tab-pane label="Write" name="write">
+            <el-tab-pane label="Markdown" name="write">
               <el-input v-model="mandayForm.description" type="textarea" :autosize="{ minRows: 4, maxRows: 10 }">
               </el-input>
             </el-tab-pane>
-            <el-tab-pane label="Preview" name="preview">
+            <el-tab-pane label="预览" name="preview">
               <div v-html="markdownToHtml(mandayForm.description)" class="markdown-body"></div>
             </el-tab-pane>
           </el-tabs>

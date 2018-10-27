@@ -62,10 +62,10 @@
         </el-form-item>
         <el-form-item label="部署内容" prop="deployContent" label-width="120px">
           <el-tabs type="border-card" v-model="deployContentTab">
-            <el-tab-pane label="Write" name="write">
+            <el-tab-pane label="Markdown" name="write">
               <el-input v-model="deployForm.deployContent" type="textarea" :autosize="{ minRows: 4, maxRows: 10 }"></el-input>
             </el-tab-pane>
-            <el-tab-pane label="Preview" name="preview">
+            <el-tab-pane label="预览" name="preview">
               <div v-html="markdownToHtml(deployForm.deployContent)" class="markdown-body"></div>
             </el-tab-pane>
           </el-tabs>
